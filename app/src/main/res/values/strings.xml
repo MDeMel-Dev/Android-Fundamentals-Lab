@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Android Fundamentals Lab</string>
-    <string name="copy_navigate_button">Navigate to Info</string>
+    <string name="copy_navigate_button">Submit</string>
 </resources>
