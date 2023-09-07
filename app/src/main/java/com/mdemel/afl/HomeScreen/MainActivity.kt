@@ -9,11 +9,10 @@ import com.mdemel.afl.SecondScreen.InfoActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit private var navigateButton: Button
-
-    val intentToNavigateToInfoScreen = Intent(this, InfoActivity::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val intentToNavigateToInfoScreen = Intent(this, InfoActivity::class.java)
 
         navigateButton = findViewById(R.id.navigateButtonToInfo)
 
