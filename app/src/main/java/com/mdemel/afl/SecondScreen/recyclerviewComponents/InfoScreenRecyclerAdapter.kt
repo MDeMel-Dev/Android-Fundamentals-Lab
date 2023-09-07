@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mdemel.afl.R
 
-class InfoScreenRecyclerAdapter(val dataList: List<String>): RecyclerView.Adapter<InfoScreenListItemViewHolder>() {
+class InfoScreenRecyclerAdapter(val dataList: List<Pair<String,String>>): RecyclerView.Adapter<InfoScreenListItemViewHolder>() {
 
     override fun getItemCount(): Int {
         return dataList.size
@@ -22,6 +22,7 @@ class InfoScreenRecyclerAdapter(val dataList: List<String>): RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: InfoScreenListItemViewHolder, position: Int) {
-         holder.firsttext?.text = dataList[position]
+         holder.firsttext?.text = dataList[position].first
+        holder.secondtext?.text = dataList[position].second
     }
 }
