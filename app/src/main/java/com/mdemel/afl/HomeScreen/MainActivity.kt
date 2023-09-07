@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import com.mdemel.afl.HomeScreen.dataModel.EnteredValue
 import com.mdemel.afl.R
 import com.mdemel.afl.SecondScreen.InfoActivity
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         // set click listners/callbacks
         navigateButton.setOnClickListener {
+            intentToNavigateToInfoScreen.putExtra("ENTERED_VALUE", EnteredValue(textHolder))
             startActivity(intentToNavigateToInfoScreen)
         }
 
