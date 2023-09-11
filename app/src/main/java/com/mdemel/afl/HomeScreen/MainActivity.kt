@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.mdemel.afl.R
 import com.mdemel.afl.SecondScreen.InfoActivity
@@ -46,11 +47,25 @@ class MainActivity : AppCompatActivity() {
             textHolder = it.toString()
         }
 
+        val stringList: MutableLiveData<List<String>>? = MutableLiveData(emptyList())
+
+        stringList?.value = listOf("a", "b", "c")
+
+        stringList?.value = listOf("x", "y", "z")
+
         val entriesApiService: EntriesService = retrofit.create<EntriesService>()
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             val entriesList = entriesApiService.getEntries()
-            Log.d("API-Test", "entries: $entriesList")
+
+            stringList?.value = entriesList.entries.map {
+                it.API
+            }
+        }
+
+        stringList?.observe(this) {
+
+            Toast.makeText(this , "data: $it", Toast.LENGTH_LONG).show()
         }
     }
 }
