@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.mdemel.afl.R
 import com.mdemel.afl.SecondScreen.InfoActivity
@@ -26,8 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     var textHolder = ""
 
-    val retrofit: Retrofit = Retrofit.Builder().baseUrl("https://api.publicapis.org").addConverterFactory(
-        GsonConverterFactory.create()).build()
+    val viewModel: HomeScreenViewModel by lazy {
+        ViewModelProvider(this).get(HomeScreenViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,23 +50,7 @@ class MainActivity : AppCompatActivity() {
             textHolder = it.toString()
         }
 
-        val stringList: MutableLiveData<List<String>>? = MutableLiveData(emptyList())
-
-        stringList?.value = listOf("a", "b", "c")
-
-        stringList?.value = listOf("x", "y", "z")
-
-        val entriesApiService: EntriesService = retrofit.create<EntriesService>()
-
-        CoroutineScope(Dispatchers.Main).launch {
-            val entriesList = entriesApiService.getEntries()
-
-            stringList?.value = entriesList.entries.map {
-                it.API
-            }
-        }
-
-        stringList?.observe(this) {
+        viewModel.stringList?.observe(this) {
 
             Toast.makeText(this , "data: $it", Toast.LENGTH_LONG).show()
         }
