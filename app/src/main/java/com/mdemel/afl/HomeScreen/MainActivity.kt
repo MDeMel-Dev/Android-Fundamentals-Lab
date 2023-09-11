@@ -3,6 +3,7 @@ package com.mdemel.afl.HomeScreen
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -11,6 +12,9 @@ import com.google.gson.Gson
 import com.mdemel.afl.R
 import com.mdemel.afl.SecondScreen.InfoActivity
 import com.mdemel.afl.network.services.EntriesService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -44,6 +48,9 @@ class MainActivity : AppCompatActivity() {
 
         val entriesApiService: EntriesService = retrofit.create<EntriesService>()
 
-        val entriesList = entriesApiService.getEntries()
+        CoroutineScope(Dispatchers.IO).launch {
+            val entriesList = entriesApiService.getEntries()
+            Log.d("API-Test", "entries: $entriesList")
+        }
     }
 }

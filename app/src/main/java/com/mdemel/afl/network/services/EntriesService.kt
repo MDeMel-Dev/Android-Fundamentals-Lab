@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface EntriesService {
 
     @GET("entries")
-    fun getEntries(): EntriesResponse
+    suspend fun getEntries(): EntriesResponse
 }
