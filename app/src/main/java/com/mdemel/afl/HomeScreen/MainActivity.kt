@@ -3,28 +3,18 @@ package com.mdemel.afl.HomeScreen
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.google.gson.Gson
 import com.mdemel.afl.R
 import com.mdemel.afl.SecondScreen.InfoActivity
-import com.mdemel.afl.network.services.EntriesService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
-    lateinit private var navigateButton: Button
-    lateinit private var textCollectionForm: EditText
+    lateinit private var submitButton: Button
+    lateinit private var usernameCollectionForm: EditText
+    lateinit private var passwordCollectionForm: EditText
 
     var textHolder = ""
 
@@ -38,21 +28,34 @@ class MainActivity : AppCompatActivity() {
         val intentToNavigateToInfoScreen = Intent(this, InfoActivity::class.java)
 
         // Get references to the views in our layout file
-        navigateButton = findViewById(R.id.navigateButtonToInfo)
-        textCollectionForm = findViewById(R.id.textCollectForm)
+        submitButton = findViewById(R.id.navigateButtonToInfo)
+        usernameCollectionForm = findViewById(R.id.usernameCollectForm)
+        passwordCollectionForm = findViewById(R.id.passwordCollectForm)
 
         // set click listners/callbacks
-        navigateButton.setOnClickListener {
-            startActivity(intentToNavigateToInfoScreen)
+        submitButton.setOnClickListener {
+            viewModel.submitClicked.value = true
         }
 
-        textCollectionForm.addTextChangedListener {
-            textHolder = it.toString()
+        usernameCollectionForm.addTextChangedListener {
+            viewModel.usernameValue = it.toString()
         }
 
-        viewModel.stringList?.observe(this) {
+        passwordCollectionForm.addTextChangedListener {
+            viewModel.passwordValue = it.toString()
+        }
 
-            Toast.makeText(this , "data: $it", Toast.LENGTH_LONG).show()
+
+        viewModel.submitClicked?.observe(this) {
+            if (it != false) {
+                viewModel.makeUserAuthenticationCall()
+            }
+        }
+
+        viewModel.authenticated?.observe(this) {
+            if (it.isNotEmpty()) {
+                Toast.makeText(this , "result: $it", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

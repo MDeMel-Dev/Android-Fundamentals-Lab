@@ -2,34 +2,39 @@ package com.mdemel.afl.HomeScreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.mdemel.afl.network.services.EntriesService
+import com.mdemel.afl.network.services.UserLoginService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 
 class HomeScreenViewModel: ViewModel() {
 
-    val retrofit: Retrofit = Retrofit.Builder().baseUrl("https://api.publicapis.org").addConverterFactory(
-        GsonConverterFactory.create()).build()
+    val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:8080/login/").addConverterFactory(
+        MoshiConverterFactory.create().asLenient()).build()
 
-    val stringList: MutableLiveData<List<String>>? = MutableLiveData(emptyList())
+    var usernameValue = ""
+    var passwordValue = ""
 
-    init {
-        stringList?.value = listOf("a", "b", "c")
+    val submitClicked: MutableLiveData<Boolean> = MutableLiveData(false)
+    val authenticated: MutableLiveData<String> = MutableLiveData("")
 
-        stringList?.value = listOf("x", "y", "z")
-
+    fun makeUserAuthenticationCall() {
         CoroutineScope(Dispatchers.Main).launch {
-            val entriesList = entriesApiService.getEntries()
+            var result = ""
 
-            stringList?.value = entriesList.entries.map {
-                it.API
+            try {
+               result =  authenticateApiService.authenticate(user = usernameValue, pswd = passwordValue)
+            } catch (e: Exception) {
+                result = e.message.toString()
             }
+
+            authenticated.value = result
         }
     }
 
-    val entriesApiService: EntriesService = retrofit.create<EntriesService>()
+    val authenticateApiService: UserLoginService = retrofit.create<UserLoginService>()
 }
