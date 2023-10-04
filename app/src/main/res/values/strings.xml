@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android Fundamentals Lab</string>
+    <string name="txt_button_shapes">Show me a shape</string>
 </resources>
