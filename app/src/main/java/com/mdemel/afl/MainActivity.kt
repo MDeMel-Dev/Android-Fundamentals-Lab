@@ -9,10 +9,8 @@ class MainActivity : AppCompatActivity() {
 
     private var shapesImageView: ImageView? = null
     private var changeShapeButton: Button? = null
-
     private val listOfShapeDrawables =
         listOf(R.drawable.img_cube, R.drawable.img_pyramid, R.drawable.img_sphere)
-
     private var currentShape: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         changeShapeButton?.setOnClickListener {
             currentShape = swapShape()
-
             currentShape?.let { shape ->
                 shapesImageView?.setImageResource(shape);
             }
