@@ -2,6 +2,7 @@ package com.mdemel.afl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 
@@ -26,7 +27,40 @@ class MainActivity : AppCompatActivity() {
                 shapesImageView?.setImageResource(shape);
             }
         }
+
+        Log.d("MelbAPPDemo", "onCreate: called")
     }
+
+    override fun onStart() {
+        super.onStart()
+
+        Log.d("MelbAPPDemo", "onStart: ")
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.d("MelbAPPDemo", "onResume: called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        Log.d("MelbAPPDemo", "onPause: was called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        Log.d("MelbAPPDemo", "onStop: was called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        Log.d("MelbAPPDemo", "onDestroy: called")
+    }
+
 
     fun swapShape(): Int {
         return listOfShapeDrawables.filterNot { it.equals(currentShape) }.random()
