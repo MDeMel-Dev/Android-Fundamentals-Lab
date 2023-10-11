@@ -3,6 +3,7 @@ package com.mdemel.afl.recyclerviewComponents
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mdemel.afl.R
 import com.mdemel.afl.models.ListItemDataModel
@@ -25,6 +26,10 @@ class MyRecyclerviewAdapter(val context: Context, val dataList: List<ListItemDat
             listItem.firstTileText.text = data.firstTile
             listItem.secondTileText.text = data.secondTile
             listItem.button.text = data.button
+
+            listItem.button.setOnClickListener {
+                Toast.makeText(context, data.button, Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

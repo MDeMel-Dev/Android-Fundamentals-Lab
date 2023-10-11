@@ -6,7 +6,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/firstTile"
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         app:cardBackgroundColor="#0D47A1"
@@ -32,7 +32,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/secondTile"
-        android:layout_width="120dp"
+        android:layout_width="110dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         app:cardBackgroundColor="#1B5E20"
@@ -61,8 +61,11 @@
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        app:cardBackgroundColor="#1B5E20"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:lines="1"
         android:text="Button"
+        app:cardBackgroundColor="#1B5E20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/secondTile"
         app:layout_constraintTop_toTopOf="parent" />
