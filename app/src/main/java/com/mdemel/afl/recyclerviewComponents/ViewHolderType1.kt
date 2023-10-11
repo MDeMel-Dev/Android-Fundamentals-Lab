@@ -1,4 +1,4 @@
-package recyclerviewComponents
+package com.mdemel.afl.recyclerviewComponents
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
