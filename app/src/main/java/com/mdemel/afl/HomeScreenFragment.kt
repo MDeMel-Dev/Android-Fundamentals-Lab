@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
 
 class HomeScreenFragment : Fragment() {
 
@@ -25,6 +26,15 @@ class HomeScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_home_screen, container, false)
+        val root = inflater.inflate(R.layout.fragment_home_screen, container, false)
+
+        root.findViewById<AppCompatButton>(R.id.buttonNavigate).setOnClickListener {
+            // Add the next screen / second screen
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.fragment_container_view, SecondScreenFragment::class.java, null)
+                ?.addToBackStack("second")?.commit()
+        }
+
+        return root
     }
 }

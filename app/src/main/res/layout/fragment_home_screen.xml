@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00796B"
-    tools:context=".HomeScreenFragment">
+    tools:context=".HomeScreenFragment"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Hello I'm a fragment"
         android:textStyle="bold"
         android:textColor="@color/white"/>
-</FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonNavigate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Navigate to Second Screen"/>
+</LinearLayout>

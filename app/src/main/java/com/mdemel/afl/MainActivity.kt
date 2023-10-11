@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Add first ever fragment to Activity
         supportFragmentManager.commit {
             add(R.id.fragment_container_view, HomeScreenFragment::class.java, null)
             setReorderingAllowed(true)
-            addToBackStack("name") // Name can be null
+            addToBackStack("home") // Name can be null
         }
-
     }
 }
