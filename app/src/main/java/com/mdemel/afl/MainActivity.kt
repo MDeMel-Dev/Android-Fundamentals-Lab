@@ -32,8 +32,11 @@ class MainActivity : AppCompatActivity() {
         button?.setOnClickListener {
             Log.d("MelbClass", "Button clicked ")
             Toast.makeText(this, "User inserted: $insertedText", Toast.LENGTH_LONG).show()
-//            startActivity(intentToNavigateToSecondScreen)
 
+            // Syntax for adding data into Intent
+            intentToNavigateToSecondScreen.putExtra("key1", insertedText)
+
+            startActivity(intentToNavigateToSecondScreen)
         }
 
         inputTextField?.addTextChangedListener { textValue ->
