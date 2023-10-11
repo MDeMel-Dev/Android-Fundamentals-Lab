@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputEditText
+import com.mdemel.afl.models.HomeScreenData
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,8 +34,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("MelbClass", "Button clicked ")
             Toast.makeText(this, "User inserted: $insertedText", Toast.LENGTH_LONG).show()
 
-            // Syntax for adding data into Intent
-            intentToNavigateToSecondScreen.putExtra("key1", insertedText)
+            // Syntax for adding a dataClass into Intent
+            intentToNavigateToSecondScreen.putExtra("key1", HomeScreenData(textValue = insertedText ?: "", numberValue = 88))
 
             startActivity(intentToNavigateToSecondScreen)
         }

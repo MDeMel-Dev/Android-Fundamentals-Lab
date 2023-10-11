@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
+import com.mdemel.afl.models.HomeScreenData
 
 class SecondScreenActivity : AppCompatActivity() {
 
@@ -22,8 +23,10 @@ class SecondScreenActivity : AppCompatActivity() {
         button = findViewById(R.id.buttonSecondScreen) as? AppCompatButton
         topTextLabel = findViewById(R.id.toptext) as? AppCompatTextView
 
-        // Syntax to retrieve data from your intents
-        topTextLabel?.text = intent.getStringExtra("key1") ?: "No Data"
+        // Syntax to retrieve a dataClass from your intents
+        (intent.extras?.get("key1") as? HomeScreenData).let {data ->
+                topTextLabel?.text = data?.textValue + " " + data?.numberValue
+        }
 
         button?.setOnClickListener {
             Log.d("MelbClass", "Second Screen Button clicked ")
