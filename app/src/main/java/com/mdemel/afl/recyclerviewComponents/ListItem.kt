@@ -10,5 +10,5 @@ class ListItem(itemView: View) : ViewHolder(itemView) {
 
     var firstTileText: TextView = itemView.findViewById(R.id.firstTileText)
     var secondTileText: TextView = itemView.findViewById(R.id.secondTileText)
-    var button: AppCompatButton = itemView.findViewById(R.id.secondTile)
+    var button: AppCompatButton = itemView.findViewById(R.id.buttonViewHolderLayout)
 }

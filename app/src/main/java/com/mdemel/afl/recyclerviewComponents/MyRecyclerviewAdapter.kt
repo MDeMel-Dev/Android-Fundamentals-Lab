@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mdemel.afl.R
-import com.mdemel.afl.models.ListItem
+import com.mdemel.afl.models.ListItemDataModel
 
-class MyRecyclerviewAdapter(val context: Context, val dataList: List<ListItem>): Adapter<com.mdemel.afl.recyclerviewComponents.ListItem>() {
+class MyRecyclerviewAdapter(val context: Context, val dataList: List<ListItemDataModel>): Adapter<com.mdemel.afl.recyclerviewComponents.ListItem>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): com.mdemel.afl.recyclerviewComponents.ListItem {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(parent.context)
