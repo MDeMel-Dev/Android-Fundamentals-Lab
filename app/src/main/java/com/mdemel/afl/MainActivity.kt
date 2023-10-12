@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://catfact.ninja")
+            .baseUrl("https://catfact.ninja") // Add the correct base url
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
