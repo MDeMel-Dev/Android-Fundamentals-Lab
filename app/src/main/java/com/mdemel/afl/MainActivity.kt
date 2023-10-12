@@ -9,6 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.mdemel.afl.api.CatFactApi
 import com.mdemel.afl.model.CatFactResponse
 import kotlinx.coroutines.CoroutineScope
@@ -18,6 +20,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel = ViewModelProvider(this).get(MainScreenViewModel::class.java)
 
     private val textLabel: TextView by lazy {
         findViewById(R.id.textView)
