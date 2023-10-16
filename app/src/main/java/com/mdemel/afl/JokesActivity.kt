@@ -38,7 +38,11 @@ class JokesActivity : AppCompatActivity() {
         }
 
         CoroutineScope(Dispatchers.Main).launch {
-            jokesLiveData.value = api.getJokes()
+            try {
+                jokesLiveData.value = api.getJokes().jokes
+            } catch (e: Exception) {
+
+            }
         }
     }
 }
