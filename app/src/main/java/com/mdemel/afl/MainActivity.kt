@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://catfact.ninja") // Add the correct base url
+            .baseUrl("https://83e7-103-192-80-150.ngrok-free.app") // Add the correct base url
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
@@ -52,8 +52,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonLogin).setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                loginApi.login(username = userName, password = password)
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                  loginResponseLiveData.value =  loginApi.login(username = userName, password = password)
+                } catch (e: Exception) {
+                    loginResponseLiveData.value = LoginResponse(message = "Network call failed $e")
+                }
+
             }
         }
     }
