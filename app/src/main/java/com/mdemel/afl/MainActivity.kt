@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
             .build()
     }
 
+    private val loginApi: LoginApi by lazy {
+        retrofit.create(LoginApi::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonLogin).setOnClickListener {
-            // retrofit call here
+            loginApi.login(username = userName, password = password)
         }
     }
 }
