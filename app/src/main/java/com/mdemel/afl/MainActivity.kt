@@ -6,7 +6,12 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -26,9 +31,17 @@ class MainActivity : AppCompatActivity() {
         retrofit.create(LoginApi::class.java)
     }
 
+    private val loginResponseLiveData = MutableLiveData<LoginResponse?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        loginResponseLiveData.observe(this) {
+            it?.let { response ->
+                Toast.makeText(this, "${response.message}", Toast.LENGTH_LONG).show()
+            }
+        }
 
         findViewById<EditText>(R.id.userNameInput).addTextChangedListener {
             userName = it.toString()
@@ -39,7 +52,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonLogin).setOnClickListener {
-            loginApi.login(username = userName, password = password)
+            CoroutineScope(Dispatchers.IO).launch {
+                loginApi.login(username = userName, password = password)
+            }
         }
     }
 }
