@@ -7,11 +7,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.widget.addTextChangedListener
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
     private var userName = ""
     private var password = ""
+
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://catfact.ninja") // Add the correct base url
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
