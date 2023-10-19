@@ -2,8 +2,10 @@ package com.mdemel.afl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import com.mdemel.afl.api.JokesApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +26,10 @@ class JokesActivity : AppCompatActivity() {
                 .build()
     }
 
+    private val recyclerview: RecyclerView by lazy {
+        findViewById(R.id.recycler_view)
+    }
+
     private val jokesLiveData = MutableLiveData<List<String>?>(null)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,8 @@ class JokesActivity : AppCompatActivity() {
         jokesLiveData.observe(this) { result ->
             result?.let { jokes ->
                 jokesListTextView.text = jokes.toString()
+
+                recyclerview.adapter = RecyclerAdapter(jokes)
             }
         }
 
